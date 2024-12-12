@@ -1,0 +1,354 @@
+/* Dark Theme - Style Adjustments */
+
+/* Scrollable workspace */
+#workspace-scroll {
+    -fx-background-color: #2C2C2C; /* Dark background */
+    -fx-border-color: #424242; /* Dark grey border */
+    -fx-border-width: 5px;
+    -fx-padding: 10px;
+}
+
+#workspace-scroll .viewport {
+    -fx-background-color: #333333; /* Darker viewport */
+}
+
+#workspace-scroll .scroll-bar:horizontal .track {
+    -fx-background-color: #616161; /* Dark grey horizontal scrollbar */
+}
+
+#workspace-scroll .scroll-bar:vertical .track {
+    -fx-background-color: #616161; /* Dark grey vertical scrollbar */
+}
+
+/* Workspace container */
+#workspace {
+    -fx-background-color: #1E1E1E; /* Dark background */
+    -fx-border-color: #424242; /* Dark grey border */
+    -fx-border-width: 4px;
+    -fx-border-radius: 10px;
+    -fx-padding: 15px;
+}
+
+/* Labels */
+#workspace .label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #FFFFFF; /* White text for contrast */
+    -fx-font-weight: bold;
+}
+
+/* Button Styling */
+#workspace .button {
+    -fx-background-color: #455A64; /* Dark blue-grey background */
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-border-color: #37474F; /* Darker blue-grey border */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#component-palette {
+    -fx-background-color: #212121; /* Dark grey background */
+    -fx-border-color: #424242; /* Slightly lighter dark border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+}
+
+#component-palette .label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #E0E0E0; /* Light grey text */
+    -fx-font-weight: normal;
+}
+
+#component-palette .button {
+    -fx-background-color: #4CAF50; /* Green background */
+    -fx-text-fill: white;
+    -fx-border-color: #388E3C;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+#component-palette .button:hover {
+    -fx-background-color: #45A049;
+}
+
+#component-palette .button:pressed {
+    -fx-background-color: #2E7D32;
+}
+
+#component-palette .menu-bar {
+    -fx-background-color: #424242; /* Darker grey menu bar */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-border-color: #616161;
+    -fx-border-width: 1px;
+}
+
+#component-palette .menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E0E0E0;
+}
+
+#component-palette .menu-item:hover {
+    -fx-background-color: #616161; /* Darker grey hover */
+}
+
+#component-palette .vbox {
+    -fx-background-color: #333333; /* Darker background */
+    -fx-border-color: #616161;
+    -fx-border-width: 1px;
+}
+
+#component-palette .block-label {
+    -fx-background-color: linear-gradient(to bottom, #FF7043, #FF5722); /* Red gradient */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-color: #E64A19;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+/* Style for the scrollpane scrollbar in the dark theme */
+#component-palette-scroll .scroll-bar:horizontal {
+    -fx-background-color: #212121; /* Dark background for horizontal scrollbar */
+}
+
+#component-palette-scroll .scroll-bar:horizontal .track {
+    -fx-background-color: #424242; /* Darker grey track */
+    -fx-background-radius: 10px; /* Rounded edges */
+}
+
+#component-palette-scroll .scroll-bar:horizontal .thumb {
+    -fx-background-color: #616161; /* Lighter grey thumb */
+    -fx-background-radius: 10px; /* Rounded thumb */
+}
+
+#component-palette-scroll .scroll-bar:vertical {
+    -fx-background-color: #212121; /* Dark background for vertical scrollbar */
+}
+
+#component-palette-scroll .scroll-bar:vertical .track {
+    -fx-background-color: #424242; /* Darker grey track */
+    -fx-background-radius: 10px;
+}
+
+#component-palette-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #616161; /* Lighter grey thumb */
+    -fx-background-radius: 10px;
+}
+
+#component-palette-scroll .scroll-bar:horizontal:hover .thumb,
+#component-palette-scroll .scroll-bar:vertical:hover .thumb {
+    -fx-background-color: #9E9E9E; /* Lighter thumb color on hover */
+}
+
+
+/* General Buttons */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #607D8B, #455A64); /* Dark blue-grey gradient */
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-color: #37474F; /* Darker blue-grey border */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+}
+
+.button:hover {
+    -fx-background-color: #546E7A; /* Slightly lighter on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #455A64; /* Darker on press */
+}
+
+/* ToolBars */
+.tool-bar {
+    -fx-background-color: #263238; /* Very dark blue-grey background */
+    -fx-padding: 5px;
+    -fx-spacing: 10px;
+    -fx-border-color: #37474F;
+    -fx-border-width: 1px;
+}
+
+/* MenuBars */
+.menu-bar {
+    -fx-background-color: #263238; /* Dark background for menu */
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-color: #37474F;
+    -fx-border-width: 1px;
+}
+
+/* MenuItems */
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-padding: 5px 10px;
+}
+
+.menu-item:hover {
+    -fx-background-color: #37474F; /* Darker hover effect */
+}
+
+/* VBox */
+.vbox {
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+    -fx-background-color: #1C1C1C; /* Dark background */
+    -fx-border-color: #424242;
+    -fx-border-width: 1px;
+}
+
+/* Label Styles */
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #FFFFFF; /* White text for contrast */
+    -fx-font-weight: normal;
+}
+
+.label.bold {
+    -fx-font-weight: bold;
+}
+
+.label.error {
+    -fx-text-fill: #F44336; /* Red for errors */
+}
+
+/* Titled Pane */
+.titled-pane {
+    -fx-border-color: #90A4AE; /* Dark blue-grey border */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #37474F; /* Dark background for pane */
+    -fx-padding: 5px;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #263238; /* Dark blue-grey for title */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-color: #37474F;
+    -fx-border-width: 0 0 2px 0;
+}
+
+/* Content section */
+.titled-pane > .content {
+    -fx-background-color: #212121; /* Dark grey content */
+    -fx-text-fill: #E0E0E0; /* Light text on dark background */
+    -fx-padding: 10px;
+    -fx-border-color: #616161;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+
+/* Header Hover */
+.titled-pane > .title:hover {
+    -fx-background-color: #37474F; /* Slightly lighter on hover */
+}
+
+/* Focused TitledPane */
+.titled-pane:focused {
+    -fx-border-color: #FFEB3B; /* Amber border when focused */
+    -fx-border-width: 3px;
+}
+
+/* Block Labels */
+.block-label {
+    -fx-background-color: linear-gradient(to bottom, #607D8B, #455A64); /* Dark blue-grey gradient */
+    -fx-text-fill: #FFFFFF; /* White text */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-color: #37474F;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 2, 2);
+}
+
+/* Hover effect */
+.block-label:hover {
+    -fx-background-color: linear-gradient(to bottom, #546E7A, #455A64); /* Lighter on hover */
+}
+
+/* Disabled BlockLabel */
+.block-label:disabled {
+    -fx-background-color: #424242; /* Dark grey background for disabled */
+    -fx-text-fill: #9E9E9E; /* Light grey text */
+    -fx-border-color: #616161;
+    -fx-effect: none;
+}
+
+/* Focused BlockLabel */
+.block-label:focused {
+    -fx-border-color: #FFEB3B; /* Amber border for focus */
+    -fx-effect: dropshadow(gaussian, rgba(255, 193, 7, 0.5), 10, 0.5, 0, 0);
+}
+
+/* Dark Theme - ContextMenu */
+.context-menu {
+    -fx-background-color: #333333; /* Dark background */
+    -fx-border-color: #424242; /* Darker border */
+    -fx-border-width: 1px;
+    -fx-background-radius: 5px; /* Rounded corners */
+}
+
+.context-menu .menu-item {
+    -fx-text-fill: white; /* White text for menu items */
+    -fx-font-size: 14px; /* Standard font size */
+    -fx-padding: 8px 16px; /* Padding for each item */
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: #616161; /* Darker background on hover */
+    -fx-text-fill: white; /* Text remains white on hover */
+}
+
+.context-menu .menu-item:disabled {
+    -fx-background-color: #424242; /* Disabled item background */
+    -fx-text-fill: #9E9E9E; /* Grey text for disabled items */
+}
+
+.context-menu .menu-item:selected {
+    -fx-background-color: #616161; /* Selected item background */
+    -fx-text-fill: white; /* Text color when selected */
+}
+
+.component-section {
+    -fx-text-fill: #E0E0E0; /* Light grey text for readability */
+    -fx-background-color: #333333; /* Dark background */
+    -fx-border-color: #424242; /* Darker border */
+    -fx-border-width: 1px;
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-padding: 10px; /* Padding inside the section */
+    -fx-spacing: 10px; /* Space between children */
+}
+
+.component-section .label {
+    -fx-text-fill: #E0E0E0; /* Light grey text for readability */
+    -fx-font-size: 16px; /* Larger font size */
+    -fx-font-weight: bold; /* Bold text */
+}
+
+.component-section .button {
+    -fx-background-color: #4CAF50; /* Green background for buttons */
+    -fx-text-fill: white; /* White text */
+    -fx-border-color: #388E3C; /* Darker green border */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-font-weight: bold; /* Bold text */
+    -fx-padding: 5px 10px; /* Padding inside the button */
+}
+
+.component-section .button:hover {
+    -fx-background-color: #45A049; /* Lighter green on hover */
+}
+
+.component-section .button:pressed {
+    -fx-background-color: #2E7D32; /* Darker green when pressed */
+}

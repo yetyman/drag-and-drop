@@ -1,0 +1,62 @@
+/* Base block styles */
+.block, .start-block, .if-block, .if-else-block, .math-block, .variable-block,
+.sensor-block, .wait-block, .for-loop-block, .switch-block, .while-loop-block,
+.dialog-block, .boolean-expression-block, .stop-block {
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 10; /* Soft rounded corners */
+    -fx-spacing: 10; /* Consistent spacing */
+    -fx-font-size: 14px; /* Standard font size */
+    -fx-font-family: "Arial", sans-serif; /* Standard font family */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Subtle shadow */
+    -fx-background-color: #f9f9f9; /* Default background */
+    -fx-text-fill: #333333; /* Text color */
+}
+
+/* Hover effects */
+.block:hover, .start-block:hover, .if-block:hover, .if-else-block:hover,
+.math-block:hover, .variable-block:hover, .sensor-block:hover, .wait-block:hover,
+.for-loop-block:hover, .switch-block:hover, .while-loop-block:hover,
+.dialog-block:hover, .boolean-expression-block:hover, .stop-block:hover {
+    -fx-background-color: #e0e0e0; /* Light gray background on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 2, 2); /* Darker shadow on hover */
+}
+
+/* Specific block styles */
+.start-block {
+    -fx-background-color: #28a745; /* Green */
+    -fx-border-color: #006400;
+}
+
+.if-block, .if-else-block, .boolean-expression-block {
+    -fx-background-color: #ffeb3b; /* Yellow */
+    -fx-border-color: #fbc02d;
+}
+
+.math-block, .variable-block, .sensor-block, .wait-block {
+    -fx-background-color: #ff9800; /* Orange */
+    -fx-border-color: #f57c00;
+}
+
+.for-loop-block, .switch-block, .stop-block, .dialog-block {
+    -fx-background-color: #f44336; /* Red */
+    -fx-border-color: #d32f2f;
+}
+
+.while-loop-block {
+    -fx-background-color: #2196f3; /* Blue */
+    -fx-border-color: #1976d2;
+}
+
+/* Adjust text color for readability depending on background color */
+.start-block, .for-loop-block, .while-loop-block, .stop-block, .dialog-block {
+    -fx-text-fill: white; /* White text on dark blocks */
+}
+
+.if-block, .if-else-block, .boolean-expression-block {
+    -fx-text-fill: black; /* Black text on yellow blocks */
+}
+
+.math-block, .variable-block, .sensor-block, .wait-block {
+    -fx-text-fill: white; /* White text on orange blocks */
+}
