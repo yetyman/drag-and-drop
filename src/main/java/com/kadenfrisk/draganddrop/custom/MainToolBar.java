@@ -1,5 +1,7 @@
 package com.kadenfrisk.draganddrop.custom;
 
+import static com.kadenfrisk.draganddrop.App.*;
+
 import com.kadenfrisk.draganddrop.App;
 import com.kadenfrisk.draganddrop.controllers.BlockManager;
 import javafx.event.ActionEvent;
@@ -7,9 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import org.slf4j.Logger;
 
-import static com.kadenfrisk.draganddrop.App.*;
-
 public class MainToolBar extends ToolBar {
+
     private static final Logger logger = App.getLogger();
 
     public MainToolBar(Grid grid) {

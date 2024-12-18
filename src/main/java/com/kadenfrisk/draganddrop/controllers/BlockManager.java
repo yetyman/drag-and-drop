@@ -5,18 +5,24 @@ import com.kadenfrisk.draganddrop.models.blocks.control.StartBlock;
 import com.kadenfrisk.draganddrop.models.blocks.control.StopBlock;
 import com.kadenfrisk.draganddrop.models.blocks.control.WaitBlock;
 import com.kadenfrisk.draganddrop.models.blocks.gui.DialogBlock;
-import com.kadenfrisk.draganddrop.models.blocks.logic.*;
+import com.kadenfrisk.draganddrop.models.blocks.logic.BooleanExpressionBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.ForLoopBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.IfBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.IfElseBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.SwitchBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.WhileLoopBlock;
 import com.kadenfrisk.draganddrop.models.blocks.operation.MathBlock;
 import com.kadenfrisk.draganddrop.models.blocks.operation.VariableBlock;
 import com.kadenfrisk.draganddrop.models.blocks.sensors.SensorBlock;
-
-import javax.swing.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class BlockManager {
+
     private static final BlockManager instance = new BlockManager();
     private final ArrayList<StartBlock> startBlocks;
     private final ArrayList<Block> blocks;
+    private boolean isStopRequested = false;
 
     private BlockManager() {
         // Private constructor to prevent instantiation
@@ -34,7 +40,12 @@ public class BlockManager {
         if (startBlocks.isEmpty()) {
             System.out.println("No start blocks found");
             // Simple GUI dialog to inform user that there are no start blocks
-            JOptionPane.showMessageDialog(null, "No start blocks found", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                null,
+                "No start blocks found",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
 
@@ -73,7 +84,9 @@ public class BlockManager {
             case "Sensor" -> new SensorBlock();
             case "Dialog Block" -> new DialogBlock();
             default -> {
-                System.out.println("Unknown block type, defaulting to example block");
+                System.out.println(
+                    "Unknown block type, defaulting to example block"
+                );
                 yield new Block();
             }
         };
@@ -81,5 +94,13 @@ public class BlockManager {
 
     public void addBlock(Block newBlock) {
         blocks.add(newBlock);
+    }
+
+    public void clearStopRequest() {
+        isStopRequested = false;
+    }
+
+    public void requestStop() {
+        isStopRequested = true;
     }
 }

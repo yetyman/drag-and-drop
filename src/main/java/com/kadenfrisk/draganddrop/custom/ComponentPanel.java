@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 
 public class ComponentPanel {
+
     private static final Logger logger = App.getLogger();
 
     public static VBox getComponentPanel() {
@@ -25,7 +26,21 @@ public class ComponentPanel {
         palette.setPadding(new Insets(10));
         palette.setMinWidth(200);
 
-        palette.getChildren().addAll(createComponentSection("Control Flow", createControlFlowComponents()), createComponentSection("Logic", createLogicComponents()), createComponentSection("Operations", createOperationComponents()), createComponentSection("Sensors", createSensorComponents()), createComponentSection("GUI", createGUIComponents()));
+        palette
+            .getChildren()
+            .addAll(
+                createComponentSection(
+                    "Control Flow",
+                    createControlFlowComponents()
+                ),
+                createComponentSection("Logic", createLogicComponents()),
+                createComponentSection(
+                    "Operations",
+                    createOperationComponents()
+                ),
+                createComponentSection("Sensors", createSensorComponents()),
+                createComponentSection("GUI", createGUIComponents())
+            );
 
         ScrollPane scrollPane = new ScrollPane(palette);
         // ID for css styling
@@ -38,23 +53,41 @@ public class ComponentPanel {
 
     private static VBox createGUIComponents() {
         VBox container = new VBox(5);
-        container.getChildren().addAll(createDraggableComponent("Dialog Block"));
+        container
+            .getChildren()
+            .addAll(createDraggableComponent("Dialog Block"));
         return container;
     }
 
     private static VBox createSensorComponents() {
         VBox container = new VBox(5);
-        container.getChildren().addAll(createDraggableComponent("Sensor"), createDraggableComponent("Sensor"), createDraggableComponent("Sensor"), createDraggableComponent("Sensor"));
+        container
+            .getChildren()
+            .addAll(
+                createDraggableComponent("Sensor"),
+                createDraggableComponent("Sensor"),
+                createDraggableComponent("Sensor"),
+                createDraggableComponent("Sensor")
+            );
         return container;
     }
 
     private static VBox createControlFlowComponents() {
         VBox container = new VBox(5);
-        container.getChildren().addAll(createDraggableComponent("Start Block"), createDraggableComponent("Stop Block"), createDraggableComponent("Wait Block"));
+        container
+            .getChildren()
+            .addAll(
+                createDraggableComponent("Start Block"),
+                createDraggableComponent("Stop Block"),
+                createDraggableComponent("Wait Block")
+            );
         return container;
     }
 
-    private static TitledPane createComponentSection(String title, VBox content) {
+    private static TitledPane createComponentSection(
+        String title,
+        VBox content
+    ) {
         TitledPane section = new TitledPane(title, content);
         section.setExpanded(true);
 
@@ -75,13 +108,27 @@ public class ComponentPanel {
 
     private static VBox createLogicComponents() {
         VBox container = new VBox(5);
-        container.getChildren().addAll(createDraggableComponent("If Block"), createDraggableComponent("If/Else Block"), createDraggableComponent("While Loop Block"), createDraggableComponent("For Loop Block"), createDraggableComponent("Switch Block"), createDraggableComponent("Boolean Expression Block"));
+        container
+            .getChildren()
+            .addAll(
+                createDraggableComponent("If Block"),
+                createDraggableComponent("If/Else Block"),
+                createDraggableComponent("While Loop Block"),
+                createDraggableComponent("For Loop Block"),
+                createDraggableComponent("Switch Block"),
+                createDraggableComponent("Boolean Expression Block")
+            );
         return container;
     }
 
     private static VBox createOperationComponents() {
         VBox container = new VBox(5);
-        container.getChildren().addAll(createDraggableComponent("Math Block"), createDraggableComponent("Variable Block"));
+        container
+            .getChildren()
+            .addAll(
+                createDraggableComponent("Math Block"),
+                createDraggableComponent("Variable Block")
+            );
         return container;
     }
 
@@ -92,5 +139,4 @@ public class ComponentPanel {
     private static BlockLabel getComponent(String name) {
         return new BlockLabel(name);
     }
-
 }

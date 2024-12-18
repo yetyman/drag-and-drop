@@ -44,40 +44,44 @@
 
 /* Buttons */
 .button {
-    -fx-background-color: linear-gradient(to bottom, #4CAF50, #388E3C); /* Green gradient */
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #4caf50,
+        #388e3c
+    ); /* Green gradient */
     -fx-text-fill: white; /* White text for contrast */
     -fx-font-size: 14px; /* Standard font size */
     -fx-font-weight: bold; /* Bold text */
-    -fx-border-color: #2E7D32; /* Darker green border */
+    -fx-border-color: #2e7d32; /* Darker green border */
     -fx-border-width: 2px; /* Thin border */
     -fx-border-radius: 5px; /* Rounded corners */
     -fx-padding: 5px 10px; /* Padding for spacing */
 }
 
 .button:hover {
-    -fx-background-color: #45A049; /* Lighter green on hover */
+    -fx-background-color: #45a049; /* Lighter green on hover */
 }
 
 .button:pressed {
-    -fx-background-color: #2E7D32; /* Darker green when pressed */
+    -fx-background-color: #2e7d32; /* Darker green when pressed */
 }
 
 /* ToolBars */
 .tool-bar {
-    -fx-background-color: #2196F3; /* Blue background */
+    -fx-background-color: #2196f3; /* Blue background */
     -fx-padding: 5px; /* Inner spacing */
     -fx-spacing: 10px; /* Space between elements */
-    -fx-border-color: #1976D2; /* Slightly darker blue border */
+    -fx-border-color: #1976d2; /* Slightly darker blue border */
     -fx-border-width: 1px;
 }
 
 /* MenuBars */
 .menu-bar {
-    -fx-background-color: #3F51B5; /* Indigo background */
+    -fx-background-color: #3f51b5; /* Indigo background */
     -fx-text-fill: white; /* White text for menus */
     -fx-font-size: 14px; /* Standard font size */
     -fx-padding: 5px; /* Inner spacing */
-    -fx-border-color: #303F9F; /* Darker border */
+    -fx-border-color: #303f9f; /* Darker border */
     -fx-border-width: 1px;
 }
 
@@ -89,15 +93,15 @@
 }
 
 .menu-item:hover {
-    -fx-background-color: #E0E0E0; /* Light grey on hover */
+    -fx-background-color: #e0e0e0; /* Light grey on hover */
 }
 
 /* VBox */
 .vbox {
     -fx-spacing: 10px; /* Space between children */
     -fx-padding: 10px; /* Inner spacing */
-    -fx-background-color: #F5F5F5; /* Light grey background */
-    -fx-border-color: #BDBDBD; /* Grey border */
+    -fx-background-color: #f5f5f5; /* Light grey background */
+    -fx-border-color: #bdbdbd; /* Grey border */
     -fx-border-width: 1px;
 }
 
@@ -117,73 +121,95 @@
 }
 
 .titled-pane {
-    -fx-border-color: #3F51B5; /* Indigo border */
+    -fx-border-color: #3f51b5; /* Indigo border */
     -fx-border-width: 2px; /* Border thickness */
     -fx-border-radius: 5px; /* Rounded corners */
-    -fx-background-color: #E8EAF6; /* Light indigo background */
+    -fx-background-color: #e8eaf6; /* Light indigo background */
     -fx-padding: 5px; /* Inner spacing */
 }
 
 /* Header styling */
 .titled-pane > .title {
-    -fx-background-color: #3F51B5; /* Indigo background for the header */
+    -fx-background-color: #3f51b5; /* Indigo background for the header */
     -fx-text-fill: white; /* White text color */
     -fx-font-weight: bold; /* Bold header text */
     -fx-font-size: 14px; /* Standard font size */
     -fx-padding: 5px 10px; /* Padding for spacing */
-    -fx-border-color: #303F9F; /* Slightly darker border for the header */
+    -fx-border-color: #303f9f; /* Slightly darker border for the header */
     -fx-border-width: 0 0 2px 0; /* Bottom border to separate header */
 }
 
 /* Expanded content styling */
 .titled-pane > .content {
-    -fx-background-color: #FFFFFF; /* White background for content */
+    -fx-background-color: #ffffff; /* White background for content */
     -fx-text-fill: black; /* Black text color */
     -fx-padding: 10px; /* Padding inside the content area */
-    -fx-border-color: #BDBDBD; /* Light grey border for content */
+    -fx-border-color: #bdbdbd; /* Light grey border for content */
     -fx-border-width: 1px; /* Border thickness */
     -fx-border-radius: 3px; /* Subtle rounded corners */
 }
 
 /* Hover effects for the header */
 .titled-pane > .title:hover {
-    -fx-background-color: #5C6BC0; /* Lighter indigo on hover */
+    -fx-background-color: #5c6bc0; /* Lighter indigo on hover */
 }
 
 /* Focused TitledPane */
 .titled-pane:focused {
-    -fx-border-color: #FFC107; /* Amber border when focused */
+    -fx-border-color: #ffc107; /* Amber border when focused */
     -fx-border-width: 3px; /* Slightly thicker focus border */
 }
 
 .block-label {
-    -fx-background-color: linear-gradient(to bottom, #FFCC80, #FFB74D); /* Orange gradient background */
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #ffcc80,
+        #ffb74d
+    ); /* Orange gradient background */
     -fx-text-fill: black; /* Black text color */
     -fx-font-size: 16px; /* Standard font size */
     -fx-font-weight: bold; /* Bold text */
     -fx-padding: 10px; /* Inner spacing */
-    -fx-border-color: #FB8C00; /* Darker orange border */
+    -fx-border-color: #fb8c00; /* Darker orange border */
     -fx-border-width: 2px; /* Border thickness */
     -fx-border-radius: 5px; /* Rounded corners */
     -fx-background-radius: 5px; /* Match background corners */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 2, 2); /* Subtle shadow for depth */
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(0, 0, 0, 0.3),
+        5,
+        0,
+        2,
+        2
+    ); /* Subtle shadow for depth */
 }
 
 /* Hover effect */
 .block-label:hover {
-    -fx-background-color: linear-gradient(to bottom, #FFD180, #FFAB40); /* Lighter gradient on hover */
+    -fx-background-color: linear-gradient(
+        to bottom,
+        #ffd180,
+        #ffab40
+    ); /* Lighter gradient on hover */
 }
 
 /* Disabled BlockLabel */
 .block-label:disabled {
-    -fx-background-color: #E0E0E0; /* Light grey background */
-    -fx-text-fill: #9E9E9E; /* Grey text */
-    -fx-border-color: #BDBDBD; /* Light grey border */
+    -fx-background-color: #e0e0e0; /* Light grey background */
+    -fx-text-fill: #9e9e9e; /* Grey text */
+    -fx-border-color: #bdbdbd; /* Light grey border */
     -fx-effect: none; /* No shadow for disabled state */
 }
 
 /* Focused BlockLabel */
 .block-label:focused {
-    -fx-border-color: #FFC107; /* Amber border when focused */
-    -fx-effect: dropshadow(gaussian, rgba(255, 193, 7, 0.5), 10, 0.5, 0, 0); /* Amber shadow */
+    -fx-border-color: #ffc107; /* Amber border when focused */
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(255, 193, 7, 0.5),
+        10,
+        0.5,
+        0,
+        0
+    ); /* Amber shadow */
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
 
 public class BetterScrollPane extends ScrollPane {
+
     private static final double SCROLL_MULTIPLIER = 0.01; // Adjust scrolling sensitivity
 
     public BetterScrollPane() {

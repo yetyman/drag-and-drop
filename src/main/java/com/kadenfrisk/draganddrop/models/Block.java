@@ -1,26 +1,38 @@
 package com.kadenfrisk.draganddrop.models;
 
 import com.kadenfrisk.draganddrop.App;
-import com.kadenfrisk.draganddrop.custom.DraggableLabel;
+import com.kadenfrisk.draganddrop.custom.Draggable;
+import com.kadenfrisk.draganddrop.popups.WarningPopup;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import org.slf4j.Logger;
 
-public class Block extends DraggableLabel {
-    private static final double CONNECTION_THRESHOLD = 100; // Max distance for auto-connection
-    private static final double DISCONNECT_THRESHOLD = 150; // Distance to force disconnect
+public class Block extends Draggable {
+
+    protected static final Logger logger = App.getLogger();
+    private static final double CONNECTION_THRESHOLD = 100;
+    private static final double DISCONNECT_THRESHOLD = 150;
     private final ContextMenu contextMenu;
     private final Block[] parents = new Block[1];
     private final Block[] children = new Block[1];
+
+    @SuppressWarnings("rawtypes")
+    protected ArrayList<Class> connectsTo = new ArrayList<>(); // Controls this blocks you can connect to this block
+
+    protected String name;
     private Line connectionLine;
 
     public Block() {
         super("Block", App.getWorkspaceScroll(), App.getGrid(), 100, 100);
+        name = "Block";
         contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete");
         deleteItem.setOnAction(this::handleDelete);
@@ -29,25 +41,51 @@ public class Block extends DraggableLabel {
             if (e.isSecondaryButtonDown()) contextMenu.show(this, e.getScreenX(), e.getScreenY());
         });
 
+        setOnMousePressed(this::handleMousePressed);
         setOnMouseDragged(this::handleMouseDragged);
         setOnMouseReleased(this::handleMouseReleased);
     }
 
     @Override
+    protected void handleMousePressed(MouseEvent event) {
+        if (parents[0] != null) {
+            parents[0].handleMousePressed(event);
+            return;
+        }
+
+        super.handleMousePressed(event);
+        this.setCursor(Cursor.CLOSED_HAND);
+        updateMouse();
+        onBlockPressed(event);
+    }
+
+    @Override
     protected void handleMouseDragged(MouseEvent event) {
+        // If the block has a parent block, use the parent's drag event instead
+        if (parents[0] != null) {
+            parents[0].handleMouseDragged(event);
+            return;
+        }
+
         super.handleMouseDragged(event);
+        updateMouse();
         updateConnectionLine();
         checkAndDisconnect();
+    }
+
+    private void updateMouse() {
+        Mouse mouse = Mouse.getInstance();
+
+        mouse.setSelectedBlock(this);
+        mouse.setDraggingBlock(true);
     }
 
     private void handleMouseReleased(MouseEvent event) {
         this.setCursor(Cursor.DEFAULT);
         Mouse.getInstance().setDraggingBlock(false);
 
-        // Snap to grid
         snapToGrid();
 
-        // Check for connection with other blocks
         Block closestBlock = null;
         if (this.getParent() instanceof Pane parentPane) {
             closestBlock = findClosestBlock(parentPane);
@@ -57,8 +95,10 @@ public class Block extends DraggableLabel {
             }
         }
 
-        // Allow custom handling of block release
         onBlockReleased(event, closestBlock);
+
+        Mouse.getInstance().setSelectedBlock(null);
+        Mouse.getInstance().setDraggingBlock(false);
     }
 
     private void handleDelete(ActionEvent event) {
@@ -70,6 +110,7 @@ public class Block extends DraggableLabel {
             parentPane.getChildren().remove(this);
             onBlockRemoved();
         }
+        onBlockRemoved();
     }
 
     public void run() {
@@ -84,7 +125,6 @@ public class Block extends DraggableLabel {
      */
     @SuppressWarnings("unused")
     protected void onBlockPressed(MouseEvent event) {
-        // Default implementation does nothing
     }
 
     /**
@@ -96,7 +136,6 @@ public class Block extends DraggableLabel {
      */
     @SuppressWarnings("unused")
     protected void onBlockDragged(MouseEvent event, double deltaX, double deltaY) {
-        // Default implementation does nothing
     }
 
     /**
@@ -107,19 +146,16 @@ public class Block extends DraggableLabel {
      */
     @SuppressWarnings("unused")
     protected void onBlockReleased(MouseEvent event, Block nearestBlock) {
-        // Default implementation does nothing
     }
 
     private void updateConnectionLine() {
         if (connectionLine != null) {
             if (parents[0] != null) {
-                // Update line from parent to this block
                 connectionLine.setStartX(parents[0].getLayoutX() + parents[0].getWidth() / 2);
                 connectionLine.setStartY(parents[0].getLayoutY() + parents[0].getHeight());
                 connectionLine.setEndX(this.getLayoutX() + this.getWidth() / 2);
                 connectionLine.setEndY(this.getLayoutY());
             } else if (children[0] != null) {
-                // Update line from this block to child
                 connectionLine.setStartX(this.getLayoutX() + this.getWidth() / 2);
                 connectionLine.setStartY(this.getLayoutY() + this.getHeight());
                 connectionLine.setEndX(children[0].getLayoutX() + children[0].getWidth() / 2);
@@ -129,11 +165,9 @@ public class Block extends DraggableLabel {
     }
 
     private void checkAndDisconnect() {
-        // If this block has a parent
         if (parents[0] != null) {
             double distance = calculateDistance(this, parents[0]);
 
-            // Disconnect if dragged too far from parent
             if (distance > DISCONNECT_THRESHOLD) {
                 disconnectFromParent();
             }
@@ -155,7 +189,7 @@ public class Block extends DraggableLabel {
         parentBlock.children[0] = null;
         this.parents[0] = null;
 
-        System.out.println(this.getName() + " disconnected from " + parentBlock.getName());
+        logger.info("{} disconnected from {}", this.getName(), parentBlock.getName());
     }
 
     private double calculateDistance(Block block1, Block block2) {
@@ -196,35 +230,103 @@ public class Block extends DraggableLabel {
         this.setLayoutY(snappedY);
     }
 
+    // Method to get the greatest grandparent block
+    public Block getGreatestGrandParent() {
+        Block current = this;
+        while (current.parents[0] != null) {
+            current = current.parents[0];
+        }
+        return current;
+    }
+
+    // Method to count all child blocks
+    public int countChildBlocks() {
+        int count = 0;
+        if (children[0] != null) {
+            count += 1 + children[0].countChildBlocks();
+        }
+        return count;
+    }
+
     private void connectTo(Block parent) {
-        // Disconnect any existing connections
+        if (!parent.connectsTo.contains(this.getClass())) {
+            logger.info("{} cannot connect to {}", this.getName(), parent.getName());
+            WarningPopup.showWarning("Invalid Connection: Cannot connect " + this.getName() + " to " + parent.getName());
+            return;
+        }
+
+        if (parent == this || isDescendant(parent)) {
+            logger.info("Cannot connect {} to itself or its descendant {}", this.getName(), parent.getName());
+            WarningPopup.showWarning("Invalid Connection: Cannot connect " + this.getName() + " to itself or its descendant");
+            return;
+        }
+
         if (parents[0] != null) {
             disconnectFromParent();
         }
-        if (parent.children[0] != null) {
-            parent.children[0].disconnectFromParent();
+
+        Block lastChild = parent;
+        while (lastChild.children[0] != null) {
+            lastChild = lastChild.children[0];
         }
 
-        // Update parent-child relationship
-        parent.children[0] = this;
-        this.parents[0] = parent;
+        lastChild.children[0] = this;
+        this.parents[0] = lastChild;
 
-        // Create a connection line
-        if (this.getParent() instanceof Pane parentPane) {
-            connectionLine = new Line(parent.getLayoutX() + parent.getWidth() / 2, parent.getLayoutY() + parent.getHeight(), this.getLayoutX() + this.getWidth() / 2, this.getLayoutY());
-            connectionLine.setStroke(Color.BLUE);
-            connectionLine.setStrokeWidth(2);
-            parentPane.getChildren().add(connectionLine);
+        if (this.getParent() instanceof Pane oldParentPane) {
+            oldParentPane.getChildren().remove(this);
         }
 
-        // Snap visually to the parent block (Inside the parent block), shifted down a bit
-        this.setLayoutX(parent.getLayoutX() + 1);
-        this.setLayoutY(parent.getLayoutY() + parent.getHeight() + 1);
+        lastChild.getChildren().add(this);
 
-        System.out.println(this.getName() + " connected to " + parent.getName());
+        this.applyCss();
+        this.layout();
+
+        // Update heights dynamically up the chain
+        updateParentHeights(this);
+
+        VBox.setMargin(this, new Insets(5, 0, 0, 0));
+
+        logger.info("{} connected to {}", this.getName(), lastChild.getName());
     }
 
-    // Call block children run method
+    /**
+     * Updates the height of all parent blocks dynamically.
+     * Ensures the last child block stays at its default size.
+     */
+    private void updateParentHeights(Block childBlock) {
+        Block currentBlock = childBlock;
+        int childDepth = 0;
+
+        // Traverse upward, updating parent block sizes
+        while (currentBlock != null) {
+            double blockHeight = getHeight();
+
+            // If this is the last child block, set it to default size
+            if (childDepth == 0) {
+                currentBlock.setPrefHeight(blockHeight); // Default size for last child block
+            } else {
+                // Resize parent blocks dynamically
+                double newHeight = blockHeight * (currentBlock.countChildBlocks() + 1 - childDepth);
+                currentBlock.setPrefHeight(newHeight);
+            }
+
+            childDepth++;
+            currentBlock = currentBlock.parents[0];
+        }
+    }
+
+    private boolean isDescendant(Block block) {
+        Block current = this;
+        while (current != null) {
+            if (current == block) {
+                return true;
+            }
+            current = current.parents[0];
+        }
+        return false;
+    }
+
     public void runChildren() {
         if (children[0] != null) {
             children[0].run();
@@ -232,12 +334,18 @@ public class Block extends DraggableLabel {
     }
 
     public String getName() {
-        return "Block";
+        return name;
     }
 
-    // Method called when you delete the block from the workspace
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    /**
+     * Method called when the block is removed from the workspace
+     */
     protected void onBlockRemoved() {
-        // Default implementation does nothing
     }
 
     /**

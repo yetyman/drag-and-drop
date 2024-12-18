@@ -2,36 +2,41 @@ package com.kadenfrisk.draganddrop.models.blocks.control;
 
 import com.kadenfrisk.draganddrop.controllers.BlockManager;
 import com.kadenfrisk.draganddrop.models.Block;
-
-import static com.kadenfrisk.draganddrop.util.LabelCreator.createLabel;
+import com.kadenfrisk.draganddrop.models.blocks.gui.DialogBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.ForLoopBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.IfBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.IfElseBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.SwitchBlock;
+import com.kadenfrisk.draganddrop.models.blocks.logic.WhileLoopBlock;
 
 public class StartBlock extends Block {
 
-    private final String name;
-
     public StartBlock() {
-        this.name = "Start";
+        name = "Start";
 
-        // Add the name to the actual block to be displayed on screen
-        this.getChildren().add(createLabel(name));
+        getStyleClass().add("start-block");
 
-        // Set the blocks css class
-        this.getStyleClass().add("start-block");
+        /*
+            Connections rules are this to child. Any blocks that you attempt to add to
+            the blocks connections in the workspace will only connect if the block you
+            are trying to connect to is in the connectsTo list.
+         */
+        connectsTo.add(DialogBlock.class);
+        connectsTo.add(IfBlock.class);
+        connectsTo.add(ForLoopBlock.class);
+        connectsTo.add(IfElseBlock.class);
+        connectsTo.add(SwitchBlock.class);
+        connectsTo.add(WhileLoopBlock.class);
+        connectsTo.add(WaitBlock.class);
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+    protected void onBlockRemoved() {
+        BlockManager.getInstance().removeStartBlock(this);
     }
 
     @Override
     public void onCreation() {
-        // Add the block to the block manager
         BlockManager.getInstance().addStartBlock(this);
     }
 }

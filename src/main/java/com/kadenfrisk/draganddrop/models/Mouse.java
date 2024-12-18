@@ -1,15 +1,12 @@
 package com.kadenfrisk.draganddrop.models;
 
-import javafx.scene.input.MouseEvent;
-
 public class Mouse {
+
     private static final Mouse instance = new Mouse();
     private boolean draggingBlock;
-    private boolean mousePressed;
+    private Block selectedBlock;
 
-    private Mouse() {
-        // Prevent instantiation
-    }
+    private Mouse() {}
 
     public static Mouse getInstance() {
         return instance;
@@ -23,23 +20,11 @@ public class Mouse {
         this.draggingBlock = draggingBlock;
     }
 
-    public boolean isMousePressed() {
-        return mousePressed;
+    public Block getSelectedBlock() {
+        return selectedBlock;
     }
 
-    public void handleMousePressed(MouseEvent event) {
-        if (event.isPrimaryButtonDown()) {
-            mousePressed = true;
-        }
-    }
-
-    public void handleMouseReleased(MouseEvent event) {
-        if (!event.isPrimaryButtonDown()) {
-            mousePressed = false;
-        }
-    }
-
-    public void handleMouseExited(MouseEvent event) {
-        mousePressed = false;
+    public void setSelectedBlock(Block selectedBlock) {
+        this.selectedBlock = selectedBlock;
     }
 }

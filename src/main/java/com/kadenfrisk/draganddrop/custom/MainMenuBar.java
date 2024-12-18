@@ -9,11 +9,21 @@ import javafx.scene.control.SeparatorMenuItem;
 import org.slf4j.Logger;
 
 public class MainMenuBar extends MenuBar {
+
     private static final Logger logger = App.getLogger();
+
     public MainMenuBar(SettingsManager settingsManager) {
         logger.info("MainMenuBar init...");
         Menu fileMenu = new Menu("File");
-        fileMenu.getItems().addAll(new MenuItem("New"), new MenuItem("Open"), new MenuItem("Save"), new SeparatorMenuItem(), new MenuItem("Exit"));
+        fileMenu
+            .getItems()
+            .addAll(
+                new MenuItem("New"),
+                new MenuItem("Open"),
+                new MenuItem("Save"),
+                new SeparatorMenuItem(),
+                new MenuItem("Exit")
+            );
 
         Menu editMenu = new Menu("Edit");
         MenuItem options = new MenuItem("Options");

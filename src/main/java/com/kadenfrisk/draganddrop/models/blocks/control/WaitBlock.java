@@ -2,30 +2,25 @@ package com.kadenfrisk.draganddrop.models.blocks.control;
 
 import com.kadenfrisk.draganddrop.models.Block;
 
-import static com.kadenfrisk.draganddrop.util.LabelCreator.createLabel;
-
 public class WaitBlock extends Block {
 
-    private final String name;
-
     public WaitBlock() {
-        this.name = "Wait";
+        name = "Wait";
 
-        // Add the name to the actual block to be displayed on screen
-        this.getChildren().add(createLabel(name));
+        //  TODO: Add field for stop duration
 
-        // Set the block's css class
-        this.getStyleClass().add("wait-block");
-    }
-
-
-    @Override
-    public String getName() {
-        return name;
+        getStyleClass().add("wait-block");
     }
 
     @Override
-    public String toString() {
-        return name;
+    public void run() {
+        int stopInSeconds = 5;
+
+        try {
+            Thread.sleep(stopInSeconds * 1000);
+        } catch (InterruptedException e) {
+            logger.error("Error while waiting :<", e);
+        }
+        runChildren();
     }
 }

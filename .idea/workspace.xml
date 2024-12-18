@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f080d600-aef8-49b6-af41-7fa30ef312d1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/drag_and_drop_debug.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.prettierrc.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/BlockManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/BlockManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/SettingsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/ThemeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/ThemeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/BetterScrollPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/BetterScrollPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/ComponentPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/ComponentPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/DraggableLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/Draggable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/MainGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/MainGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/MainMenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/MainMenuBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/MainToolBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/MainToolBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/Root.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/custom/Root.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/items/BlockLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/items/BlockLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Mouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/control/StartBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/control/StartBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/control/StopBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/control/StopBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/control/WaitBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/control/WaitBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/gui/DialogBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/gui/DialogBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/BooleanExpressionBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/BooleanExpressionBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/ForLoopBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/ForLoopBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/IfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/IfBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/IfElseBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/IfElseBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/SwitchBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/SwitchBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/WhileLoopBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/logic/WhileLoopBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/operation/MathBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/operation/MathBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/operation/VariableBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/operation/VariableBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/sensors/SensorBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/blocks/sensors/SensorBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/popups/WarningPopup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/popups/WarningPopup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/FileNameTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/FileNameTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/Geometry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/Geometry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/LabelCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/LabelCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sharedStyles/blocks.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sharedStyles/blocks.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/themes/dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/themes/dark.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/themes/debug.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/themes/debug.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/themes/light.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/themes/light.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/themes/purple.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/themes/purple.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ofluffydev&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ofluffydev/drag-and-drop.git&quot;,
+    &quot;accountId&quot;: &quot;a6d8d115-381c-46ff-aa0c-34ac5990fd3b&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2q8rFheAG5i75nW3d71ca6Ywidv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.drag-and-drop debug.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/fuffe/RustroverProjects/github_bulk/arymus_repos/Amino-Acids-Generator&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f080d600-aef8-49b6-af41-7fa30ef312d1" name="Changes" comment="" />
+      <created>1734054941325</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734054941325</updated>
+      <workItem from="1734054942792" duration="6096000" />
+      <workItem from="1734064768664" duration="682000" />
+      <workItem from="1734290079078" duration="7222000" />
+      <workItem from="1734302271397" duration="84000" />
+      <workItem from="1734314239913" duration="6632000" />
+      <workItem from="1734405676909" duration="1982000" />
+      <workItem from="1734486836122" duration="31000" />
+      <workItem from="1734504917506" duration="602000" />
+      <workItem from="1734512489319" duration="45000" />
+      <workItem from="1734545409559" duration="391000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -7,9 +7,14 @@ import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 
 public class Root extends BorderPane {
-    private final static Logger logger = App.getLogger();
 
-    public Root(Grid grid, BetterScrollPane scrollPane, SettingsManager settingsManager) {
+    private static final Logger logger = App.getLogger();
+
+    public Root(
+        Grid grid,
+        BetterScrollPane scrollPane,
+        SettingsManager settingsManager
+    ) {
         super();
         logger.info("Init ComponentPanel...");
         VBox componentPanel = ComponentPanel.getComponentPanel();

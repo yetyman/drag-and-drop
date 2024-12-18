@@ -1,0 +1,14 @@
+{
+    "name": "drag-and-drop",
+    "version": "1.0.0",
+    "repository": "https://github.com/ofluffydev/drag-and-drop.git",
+    "author": "ofluffydev <fufferpish@gmail.com>",
+    "scripts": {
+        "format": "prettier . --write"
+    },
+    "devDependencies": {
+        "@prettier/plugin-xml": "^3.4.1",
+        "prettier": "^3.4.2",
+        "prettier-plugin-java": "^2.6.5"
+    }
+}

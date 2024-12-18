@@ -1,18 +1,18 @@
 package com.kadenfrisk.draganddrop.controllers;
 
+import static com.kadenfrisk.draganddrop.util.FileNameTools.removeExtensions;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kadenfrisk.draganddrop.App;
-import org.slf4j.Logger;
-
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.kadenfrisk.draganddrop.util.FileNameTools.removeExtensions;
+import javax.swing.*;
+import org.slf4j.Logger;
 
 public class SettingsManager {
+
     private static final String SETTINGS_FILE = findSettingsFile(); // Path to settings file. MUST BE RUN FIRST
     private static final Logger logger = App.getLogger();
     private Map<String, Object> settings = new HashMap<>();
@@ -33,7 +33,9 @@ public class SettingsManager {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Settings file not found. Starting with defaults.");
+            System.out.println(
+                "Settings file not found. Starting with defaults."
+            );
         }
     }
 
@@ -49,19 +51,27 @@ public class SettingsManager {
             return file.getAbsolutePath();
         }
 
-        String[] choices = {"Create in current directory", "Create in home directory"};
+        String[] choices = {
+            "Create in current directory",
+            "Create in home directory",
+        };
         int choice = JOptionPane.showOptionDialog(
-                null,
-                "Settings file not found. Would you like to create one?",
-                "Settings File",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                choices,
-                choices[0]
+            null,
+            "Settings file not found. Would you like to create one?",
+            "Settings File",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            choices,
+            choices[0]
         );
 
-        return choice == 0 ? "settings.json" : new File(System.getProperty("user.home"), "settings.json").getAbsolutePath();
+        return choice == 0
+            ? "settings.json"
+            : new File(
+                System.getProperty("user.home"),
+                "settings.json"
+            ).getAbsolutePath();
     }
 
     public Object get(String key, Object defaultValue) {

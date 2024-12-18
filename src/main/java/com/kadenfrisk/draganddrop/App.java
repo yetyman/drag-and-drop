@@ -1,5 +1,7 @@
 package com.kadenfrisk.draganddrop;
 
+import static com.kadenfrisk.draganddrop.util.Geometry.*;
+
 import com.kadenfrisk.draganddrop.controllers.SettingsManager;
 import com.kadenfrisk.draganddrop.custom.*;
 import javafx.application.Application;
@@ -19,9 +21,8 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.kadenfrisk.draganddrop.util.Geometry.*;
-
 public class App extends Application {
+
     private static final Logger logger = LoggerFactory.getLogger(App.class);
     private static final double ZOOM_IN_BOUND = 2.0;
     private static final double ZOOM_OUT_BOUND = 0.5;
@@ -56,15 +57,27 @@ public class App extends Application {
         scrollPane.addEventFilter(MouseEvent.MOUSE_DRAGGED, event -> {
             double mouseX = event.getSceneX();
             double mouseY = event.getSceneY();
-            logger.info("Dragging inside ScrollPane at: {}, {}", mouseX, mouseY);
+            logger.info(
+                "Dragging inside ScrollPane at: {}, {}",
+                mouseX,
+                mouseY
+            );
         });
 
-        ChangeListener<Number> scrollListener = (observable, oldValue, newValue) -> {
+        ChangeListener<Number> scrollListener = (
+            observable,
+            oldValue,
+            newValue
+        ) -> {
             double hValue = scrollPane.getHvalue();
             double vValue = scrollPane.getVvalue();
             double hDistance = hValue * grid.getHeight();
             double vDistance = vValue * grid.getWidth();
-            logger.info("Scrolled distance - Horizontal: {}, Vertical: {}", hDistance, vDistance);
+            logger.info(
+                "Scrolled distance - Horizontal: {}, Vertical: {}",
+                hDistance,
+                vDistance
+            );
         };
 
         scrollPane.hvalueProperty().addListener(scrollListener);
@@ -89,7 +102,9 @@ public class App extends Application {
         settings.setOnAction(event -> settingsManager.showSettingsDialog());
 
         VBox tools = new VBox();
-        tools.getChildren().addAll(new MainMenuBar(settingsManager), new MainToolBar(grid));
+        tools
+            .getChildren()
+            .addAll(new MainMenuBar(settingsManager), new MainToolBar(grid));
         borderPane.setTop(tools);
 
         stage.show();
@@ -101,7 +116,9 @@ public class App extends Application {
 
     public static Scene getScene() {
         if (scene == null) {
-            throw new IllegalStateException("Scene has not been initialized yet.");
+            throw new IllegalStateException(
+                "Scene has not been initialized yet."
+            );
         }
         return scene;
     }

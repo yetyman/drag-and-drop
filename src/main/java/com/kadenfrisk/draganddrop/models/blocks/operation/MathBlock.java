@@ -1,21 +1,16 @@
 package com.kadenfrisk.draganddrop.models.blocks.operation;
 
 import com.kadenfrisk.draganddrop.models.Block;
-
-import static com.kadenfrisk.draganddrop.util.LabelCreator.createLabel;
+import com.kadenfrisk.draganddrop.util.LabelCreator;
 
 public class MathBlock extends Block {
 
     private final String name;
 
     public MathBlock() {
-        this.name = "Math";
-
-        // Add the name to the actual block to be displayed on screen
-        this.getChildren().add(createLabel(name));
-
-        // Set the block's css class
-        this.getStyleClass().add("math-block");
+        name = "Math";
+        getChildren().add(LabelCreator.createLabel(name));
+        getStyleClass().add("math-block");
     }
 
     @Override

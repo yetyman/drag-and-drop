@@ -3,6 +3,7 @@ package com.kadenfrisk.draganddrop.util;
 import static java.util.stream.IntStream.range;
 
 public class FileNameTools {
+
     public static String[] removeExtensions(String[] filenames) {
         String[] result = new String[filenames.length];
         range(0, filenames.length).forEach(i -> {
