@@ -1,9 +1,11 @@
 package com.kadenfrisk.draganddrop;
 
-import static com.kadenfrisk.draganddrop.util.Geometry.*;
-
 import com.kadenfrisk.draganddrop.controllers.SettingsManager;
-import com.kadenfrisk.draganddrop.custom.*;
+import com.kadenfrisk.draganddrop.custom.BetterScrollPane;
+import com.kadenfrisk.draganddrop.custom.ComponentPanel;
+import com.kadenfrisk.draganddrop.custom.Grid;
+import com.kadenfrisk.draganddrop.custom.MainMenuBar;
+import com.kadenfrisk.draganddrop.custom.MainToolBar;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Point2D;
@@ -13,13 +15,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.kadenfrisk.draganddrop.util.Geometry.getBottomRight;
+import static com.kadenfrisk.draganddrop.util.Geometry.getTopLeft;
+import static com.kadenfrisk.draganddrop.util.Geometry.getViewPortBounds;
+import static com.kadenfrisk.draganddrop.util.Geometry.getZoomFactor;
+import static com.kadenfrisk.draganddrop.util.Geometry.scaleRectangle;
+import static com.kadenfrisk.draganddrop.util.Geometry.setZoomFactor;
 
 public class App extends Application {
 
@@ -36,80 +44,6 @@ public class App extends Application {
         launch();
     }
 
-    @Override
-    public void start(Stage stage) {
-        VBox root = new VBox();
-        VBox items = ComponentPanel.getComponentPanel();
-        SplitPane splitPane = new SplitPane();
-
-        ScrollPane itemsScroller = new ScrollPane(items);
-        BorderPane borderPane = new BorderPane();
-
-        scrollPane = new BetterScrollPane();
-
-        Group group = new Group();
-
-        grid = new Grid(6400, 4800);
-        group.getChildren().add(grid);
-
-        scrollPane.setContent(group);
-
-        scrollPane.addEventFilter(MouseEvent.MOUSE_DRAGGED, event -> {
-            double mouseX = event.getSceneX();
-            double mouseY = event.getSceneY();
-            logger.info(
-                "Dragging inside ScrollPane at: {}, {}",
-                mouseX,
-                mouseY
-            );
-        });
-
-        ChangeListener<Number> scrollListener = (
-            observable,
-            oldValue,
-            newValue
-        ) -> {
-            double hValue = scrollPane.getHvalue();
-            double vValue = scrollPane.getVvalue();
-            double hDistance = hValue * grid.getHeight();
-            double vDistance = vValue * grid.getWidth();
-            logger.info(
-                "Scrolled distance - Horizontal: {}, Vertical: {}",
-                hDistance,
-                vDistance
-            );
-        };
-
-        scrollPane.hvalueProperty().addListener(scrollListener);
-        scrollPane.vvalueProperty().addListener(scrollListener);
-
-        root.getChildren().add(scrollPane);
-        splitPane.getItems().addAll(itemsScroller, root);
-        splitPane.setDividerPosition(0, 0.2);
-
-        borderPane.setLeft(itemsScroller);
-        borderPane.setCenter(splitPane);
-
-        scene = new Scene(borderPane, 960.0, 540.0);
-
-        stage.setTitle("Zoom-able Content");
-        stage.setScene(scene);
-
-        SettingsManager settingsManager = new SettingsManager();
-        settingsManager.loadSettings();
-
-        Button settings = new Button("Settings");
-        settings.setOnAction(event -> settingsManager.showSettingsDialog());
-
-        VBox tools = new VBox();
-        tools
-            .getChildren()
-            .addAll(new MainMenuBar(settingsManager), new MainToolBar(grid));
-        borderPane.setTop(tools);
-
-        stage.show();
-    }
-
     public static void resetZoom() {
         setZoom(1.0);
     }
@@ -117,7 +51,7 @@ public class App extends Application {
     public static Scene getScene() {
         if (scene == null) {
             throw new IllegalStateException(
-                "Scene has not been initialized yet."
+                    "Scene has not been initialized yet."
             );
         }
         return scene;
@@ -181,5 +115,79 @@ public class App extends Application {
 
     public static Logger getLogger() {
         return logger;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        VBox root = new VBox();
+        VBox items = ComponentPanel.getComponentPanel();
+        SplitPane splitPane = new SplitPane();
+
+        ScrollPane itemsScroller = new ScrollPane(items);
+        BorderPane borderPane = new BorderPane();
+
+        scrollPane = new BetterScrollPane();
+
+        Group group = new Group();
+
+        grid = new Grid(6400, 4800);
+        group.getChildren().add(grid);
+
+        scrollPane.setContent(group);
+
+//        scrollPane.addEventFilter(MouseEvent.MOUSE_DRAGGED, event -> {
+//            double mouseX = event.getSceneX();
+//            double mouseY = event.getSceneY();
+//            logger.info(
+//                "Dragging inside ScrollPane at: {}, {}",
+//                mouseX,
+//                mouseY
+//            );
+//        });
+
+        ChangeListener<Number> scrollListener = (
+                observable,
+                oldValue,
+                newValue
+        ) -> {
+            double hValue = scrollPane.getHvalue();
+            double vValue = scrollPane.getVvalue();
+            double hDistance = hValue * grid.getHeight();
+            double vDistance = vValue * grid.getWidth();
+            logger.info(
+                    "Scrolled distance - Horizontal: {}, Vertical: {}",
+                    hDistance,
+                    vDistance
+            );
+        };
+
+        scrollPane.hvalueProperty().addListener(scrollListener);
+        scrollPane.vvalueProperty().addListener(scrollListener);
+
+        root.getChildren().add(scrollPane);
+        splitPane.getItems().addAll(itemsScroller, root);
+        splitPane.setDividerPosition(0, 0.2);
+
+        borderPane.setLeft(itemsScroller);
+        borderPane.setCenter(splitPane);
+
+        scene = new Scene(borderPane, 960.0, 540.0);
+
+        stage.setTitle("Zoom-able Content");
+        stage.setScene(scene);
+
+        SettingsManager settingsManager = new SettingsManager();
+        settingsManager.loadSettings();
+
+        Button settings = new Button("Settings");
+        settings.setOnAction(event -> settingsManager.showSettingsDialog());
+
+        VBox tools = new VBox();
+        tools
+                .getChildren()
+                .addAll(new MainMenuBar(settingsManager), new MainToolBar(grid));
+        borderPane.setTop(tools);
+
+        stage.show();
     }
 }

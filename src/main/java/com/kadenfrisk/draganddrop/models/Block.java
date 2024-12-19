@@ -12,7 +12,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
 import org.slf4j.Logger;
 
 public class Block extends Draggable {
@@ -20,18 +19,18 @@ public class Block extends Draggable {
     protected static final Logger logger = App.getLogger();
     private static final double CONNECTION_THRESHOLD = 100;
     private static final double DISCONNECT_THRESHOLD = 150;
+    private static final int DEFAULT_HEIGHT = 100;
+    private static final int DEFAULT_WIDTH = 100;
     private final ContextMenu contextMenu;
     private final Block[] parents = new Block[1];
     private final Block[] children = new Block[1];
-
     @SuppressWarnings("rawtypes")
     protected ArrayList<Class> connectsTo = new ArrayList<>(); // Controls this blocks you can connect to this block
 
     protected String name;
-    private Line connectionLine;
 
     public Block() {
-        super("Block", App.getWorkspaceScroll(), App.getGrid(), 100, 100);
+        super("Block", App.getWorkspaceScroll(), App.getGrid(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
         name = "Block";
         contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete");
@@ -61,16 +60,36 @@ public class Block extends Draggable {
 
     @Override
     protected void handleMouseDragged(MouseEvent event) {
-        // If the block has a parent block, use the parent's drag event instead
         if (parents[0] != null) {
-            parents[0].handleMouseDragged(event);
+            // Visually and programmatically disconnect from the parent
+            fullDisconnectFromParent(event);
             return;
         }
 
         super.handleMouseDragged(event);
         updateMouse();
-        updateConnectionLine();
         checkAndDisconnect();
+    }
+
+    private void fullDisconnectFromParent(MouseEvent event) {
+        // Moves the block back into the workspace, and disconnects it from the parent
+        if (parents[0] != null) {
+            // Reset the parent's height
+            if (parents[0].children[0] != null) {
+                parents[0].setPrefHeight(DEFAULT_HEIGHT);
+            }
+
+            // Disconnect from parent
+            disconnectFromParent();
+            if (this.getParent() instanceof Pane parentPane) {
+                parentPane.getChildren().remove(this);
+                App.getGrid().getChildren().add(this);
+
+                // Move the block to the mouse
+                this.setLayoutX(event.getSceneX() - this.getWidth() / 2);
+                this.setLayoutY(event.getSceneY() - this.getHeight() / 2);
+            }
+        }
     }
 
     private void updateMouse() {
@@ -103,10 +122,6 @@ public class Block extends Draggable {
 
     private void handleDelete(ActionEvent event) {
         if (this.getParent() instanceof Pane parentPane) {
-            if (connectionLine != null) {
-                parentPane.getChildren().remove(connectionLine);
-                connectionLine = null;
-            }
             parentPane.getChildren().remove(this);
             onBlockRemoved();
         }
@@ -148,22 +163,6 @@ public class Block extends Draggable {
     protected void onBlockReleased(MouseEvent event, Block nearestBlock) {
     }
 
-    private void updateConnectionLine() {
-        if (connectionLine != null) {
-            if (parents[0] != null) {
-                connectionLine.setStartX(parents[0].getLayoutX() + parents[0].getWidth() / 2);
-                connectionLine.setStartY(parents[0].getLayoutY() + parents[0].getHeight());
-                connectionLine.setEndX(this.getLayoutX() + this.getWidth() / 2);
-                connectionLine.setEndY(this.getLayoutY());
-            } else if (children[0] != null) {
-                connectionLine.setStartX(this.getLayoutX() + this.getWidth() / 2);
-                connectionLine.setStartY(this.getLayoutY() + this.getHeight());
-                connectionLine.setEndX(children[0].getLayoutX() + children[0].getWidth() / 2);
-                connectionLine.setEndY(children[0].getLayoutY());
-            }
-        }
-    }
-
     private void checkAndDisconnect() {
         if (parents[0] != null) {
             double distance = calculateDistance(this, parents[0]);
@@ -174,16 +173,13 @@ public class Block extends Draggable {
         }
     }
 
+    /**
+     * Disconnects this block from its parent block
+     */
     private void disconnectFromParent() {
         if (parents[0] == null) return;
 
         Block parentBlock = parents[0];
-
-        // Remove the connection line
-        if (this.getParent() instanceof Pane parentPane && connectionLine != null) {
-            parentPane.getChildren().remove(connectionLine);
-            connectionLine = null;
-        }
 
         // Clear parent-child references
         parentBlock.children[0] = null;
