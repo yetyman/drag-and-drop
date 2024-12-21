@@ -1,8 +1,9 @@
 package com.kadenfrisk.draganddrop.items;
 
+import static com.kadenfrisk.draganddrop.util.Clipboard.hasClipboardManager;
+
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -30,9 +31,5 @@ public class BlockLabel extends Label {
         });
 
         getStyleClass().add("block-label");
-    }
-
-    private boolean hasClipboardManager() {
-        return Clipboard.getSystemClipboard() != null;
     }
 }

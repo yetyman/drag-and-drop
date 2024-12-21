@@ -1,48 +1,91 @@
 package com.kadenfrisk.draganddrop.models;
 
+import static com.kadenfrisk.draganddrop.util.Clipboard.hasClipboardManager;
+
 import com.kadenfrisk.draganddrop.App;
 import com.kadenfrisk.draganddrop.custom.Draggable;
 import com.kadenfrisk.draganddrop.popups.WarningPopup;
+import com.kadenfrisk.draganddrop.util.DragOut;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 
 public class Block extends Draggable {
 
+    public static final int DEFAULT_HEIGHT = 100;
+    public static final int DEFAULT_WIDTH = 100;
     protected static final Logger logger = App.getLogger();
     private static final double CONNECTION_THRESHOLD = 100;
     private static final double DISCONNECT_THRESHOLD = 150;
-    private static final int DEFAULT_HEIGHT = 100;
-    private static final int DEFAULT_WIDTH = 100;
     private final ContextMenu contextMenu;
     private final Block[] parents = new Block[1];
     private final Block[] children = new Block[1];
+
     @SuppressWarnings("rawtypes")
     protected ArrayList<Class> connectsTo = new ArrayList<>(); // Controls this blocks you can connect to this block
 
     protected String name;
 
     public Block() {
-        super("Block", App.getWorkspaceScroll(), App.getGrid(), DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        super(
+            "Block",
+            App.getWorkspaceScroll(),
+            App.getGrid(),
+            DEFAULT_WIDTH,
+            DEFAULT_HEIGHT
+        );
         name = "Block";
         contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete");
         deleteItem.setOnAction(this::handleDelete);
         contextMenu.getItems().add(deleteItem);
         addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
-            if (e.isSecondaryButtonDown()) contextMenu.show(this, e.getScreenX(), e.getScreenY());
+            if (e.isSecondaryButtonDown()) contextMenu.show(
+                this,
+                e.getScreenX(),
+                e.getScreenY()
+            );
         });
 
         setOnMousePressed(this::handleMousePressed);
-        setOnMouseDragged(this::handleMouseDragged);
         setOnMouseReleased(this::handleMouseReleased);
+
+        addEventFilter(MouseEvent.DRAG_DETECTED, e -> {
+            logger.info("Mouse dragged");
+            startFullDrag();
+
+            logger.info("{} dragged", e.getSource().getClass().getName());
+
+            if (parents[0] != null) {
+                Dragboard db = startDragAndDrop(TransferMode.ANY);
+                DragOut.getInstance().setCurrentBlock(this);
+
+                // Store parent for later
+                Block parent = parents[0];
+
+                disconnectFromParent();
+                if (hasClipboardManager()) {
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString("Drag-out");
+                    db.setContent(content);
+                } else {
+                    System.out.println("No clipboard manager available");
+                }
+                e.consume();
+
+                parent.setPrefHeight(DEFAULT_HEIGHT);
+            }
+        });
     }
 
     @Override
@@ -60,36 +103,9 @@ public class Block extends Draggable {
 
     @Override
     protected void handleMouseDragged(MouseEvent event) {
-        if (parents[0] != null) {
-            // Visually and programmatically disconnect from the parent
-            fullDisconnectFromParent(event);
-            return;
-        }
-
         super.handleMouseDragged(event);
         updateMouse();
         checkAndDisconnect();
-    }
-
-    private void fullDisconnectFromParent(MouseEvent event) {
-        // Moves the block back into the workspace, and disconnects it from the parent
-        if (parents[0] != null) {
-            // Reset the parent's height
-            if (parents[0].children[0] != null) {
-                parents[0].setPrefHeight(DEFAULT_HEIGHT);
-            }
-
-            // Disconnect from parent
-            disconnectFromParent();
-            if (this.getParent() instanceof Pane parentPane) {
-                parentPane.getChildren().remove(this);
-                App.getGrid().getChildren().add(this);
-
-                // Move the block to the mouse
-                this.setLayoutX(event.getSceneX() - this.getWidth() / 2);
-                this.setLayoutY(event.getSceneY() - this.getHeight() / 2);
-            }
-        }
     }
 
     private void updateMouse() {
@@ -108,8 +124,16 @@ public class Block extends Draggable {
         Block closestBlock = null;
         if (this.getParent() instanceof Pane parentPane) {
             closestBlock = findClosestBlock(parentPane);
-            if (closestBlock != null && isWithinConnectionThreshold(closestBlock)) {
-                App.getLogger().info("Connecting blocks {} and {}", this.getName(), closestBlock.getName());
+            if (
+                closestBlock != null &&
+                isWithinConnectionThreshold(closestBlock)
+            ) {
+                App.getLogger()
+                    .info(
+                        "Connecting blocks {} and {}",
+                        this.getName(),
+                        closestBlock.getName()
+                    );
                 connectTo(closestBlock);
             }
         }
@@ -139,8 +163,7 @@ public class Block extends Draggable {
      * @param event The mouse event that triggered the press
      */
     @SuppressWarnings("unused")
-    protected void onBlockPressed(MouseEvent event) {
-    }
+    protected void onBlockPressed(MouseEvent event) {}
 
     /**
      * Override this method to add custom behavior during block dragging
@@ -150,8 +173,11 @@ public class Block extends Draggable {
      * @param deltaY The vertical distance moved
      */
     @SuppressWarnings("unused")
-    protected void onBlockDragged(MouseEvent event, double deltaX, double deltaY) {
-    }
+    protected void onBlockDragged(
+        MouseEvent event,
+        double deltaX,
+        double deltaY
+    ) {}
 
     /**
      * Override this method to add custom behavior when the block is released
@@ -160,8 +186,7 @@ public class Block extends Draggable {
      * @param nearestBlock The closest block found during release (maybe null)
      */
     @SuppressWarnings("unused")
-    protected void onBlockReleased(MouseEvent event, Block nearestBlock) {
-    }
+    protected void onBlockReleased(MouseEvent event, Block nearestBlock) {}
 
     private void checkAndDisconnect() {
         if (parents[0] != null) {
@@ -185,7 +210,11 @@ public class Block extends Draggable {
         parentBlock.children[0] = null;
         this.parents[0] = null;
 
-        logger.info("{} disconnected from {}", this.getName(), parentBlock.getName());
+        logger.info(
+            "{} disconnected from {}",
+            this.getName(),
+            parentBlock.getName()
+        );
     }
 
     private double calculateDistance(Block block1, Block block2) {
@@ -194,7 +223,9 @@ public class Block extends Draggable {
         double centerX2 = block2.getLayoutX() + block2.getWidth() / 2;
         double centerY2 = block2.getLayoutY() + block2.getHeight() / 2;
 
-        return Math.sqrt(Math.pow(centerX2 - centerX1, 2) + Math.pow(centerY2 - centerY1, 2));
+        return Math.sqrt(
+            Math.pow(centerX2 - centerX1, 2) + Math.pow(centerY2 - centerY1, 2)
+        );
     }
 
     private Block findClosestBlock(Pane parentPane) {
@@ -226,15 +257,6 @@ public class Block extends Draggable {
         this.setLayoutY(snappedY);
     }
 
-    // Method to get the greatest grandparent block
-    public Block getGreatestGrandParent() {
-        Block current = this;
-        while (current.parents[0] != null) {
-            current = current.parents[0];
-        }
-        return current;
-    }
-
     // Method to count all child blocks
     public int countChildBlocks() {
         int count = 0;
@@ -246,14 +268,31 @@ public class Block extends Draggable {
 
     private void connectTo(Block parent) {
         if (!parent.connectsTo.contains(this.getClass())) {
-            logger.info("{} cannot connect to {}", this.getName(), parent.getName());
-            WarningPopup.showWarning("Invalid Connection: Cannot connect " + this.getName() + " to " + parent.getName());
+            logger.info(
+                "{} cannot connect to {}",
+                this.getName(),
+                parent.getName()
+            );
+            WarningPopup.showWarning(
+                "Invalid Connection: Cannot connect " +
+                this.getName() +
+                " to " +
+                parent.getName()
+            );
             return;
         }
 
         if (parent == this || isDescendant(parent)) {
-            logger.info("Cannot connect {} to itself or its descendant {}", this.getName(), parent.getName());
-            WarningPopup.showWarning("Invalid Connection: Cannot connect " + this.getName() + " to itself or its descendant");
+            logger.info(
+                "Cannot connect {} to itself or its descendant {}",
+                this.getName(),
+                parent.getName()
+            );
+            WarningPopup.showWarning(
+                "Invalid Connection: Cannot connect " +
+                this.getName() +
+                " to itself or its descendant"
+            );
             return;
         }
 
@@ -303,7 +342,9 @@ public class Block extends Draggable {
                 currentBlock.setPrefHeight(blockHeight); // Default size for last child block
             } else {
                 // Resize parent blocks dynamically
-                double newHeight = blockHeight * (currentBlock.countChildBlocks() + 1 - childDepth);
+                double newHeight =
+                    blockHeight *
+                    (currentBlock.countChildBlocks() + 1 - childDepth);
                 currentBlock.setPrefHeight(newHeight);
             }
 
@@ -341,8 +382,7 @@ public class Block extends Draggable {
     /**
      * Method called when the block is removed from the workspace
      */
-    protected void onBlockRemoved() {
-    }
+    protected void onBlockRemoved() {}
 
     /**
      * Method called when the block is created and added to the workspace

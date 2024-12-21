@@ -1,18 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <project version="4">
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f080d600-aef8-49b6-af41-7fa30ef312d1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Block.java" afterDir="false" />
+    <list
+            default="true"
+            id="f080d600-aef8-49b6-af41-7fa30ef312d1"
+            name="Changes"
+            comment=""
+        >
+      <change
+                afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/Clipboard.java"
+                afterDir="false"
+            />
+      <change
+                afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/util/DragOut.java"
+                afterDir="false"
+            />
+      <change
+                beforePath="$PROJECT_DIR$/.idea/workspace.xml"
+                beforeDir="false"
+                afterPath="$PROJECT_DIR$/.idea/workspace.xml"
+                afterDir="false"
+            />
+      <change
+                beforePath="$PROJECT_DIR$/pom.xml"
+                beforeDir="false"
+                afterPath="$PROJECT_DIR$/pom.xml"
+                afterDir="false"
+            />
+      <change
+                beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/App.java"
+                beforeDir="false"
+                afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/App.java"
+                afterDir="false"
+            />
+      <change
+                beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/BlockManager.java"
+                beforeDir="false"
+                afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/controllers/BlockManager.java"
+                afterDir="false"
+            />
+      <change
+                beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/items/BlockLabel.java"
+                beforeDir="false"
+                afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/items/BlockLabel.java"
+                afterDir="false"
+            />
+      <change
+                beforePath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Block.java"
+                beforeDir="false"
+                afterPath="$PROJECT_DIR$/src/main/java/com/kadenfrisk/draganddrop/models/Block.java"
+                afterDir="false"
+            />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FormatOnSaveOptions">
     <option name="myRunOnSave" value="true" />
@@ -77,15 +130,31 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
+        <option
+                    value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145"
+                />
+        <option
+                    value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145"
+                />
       </set>
     </attachedChunks>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component
+        name="SpellCheckerSettings"
+        RuntimeDictionaries="0"
+        Folders="0"
+        CustomDictionaries="0"
+        DefaultDictionary="application-level"
+        UseSingleDictionary="true"
+        transferred="true"
+    />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f080d600-aef8-49b6-af41-7fa30ef312d1" name="Changes" comment="" />
+      <changelist
+                id="f080d600-aef8-49b6-af41-7fa30ef312d1"
+                name="Changes"
+                comment=""
+            />
       <created>1734054941325</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -103,6 +172,10 @@
       <workItem from="1734577528089" duration="1294000" />
       <workItem from="1734579471034" duration="606000" />
       <workItem from="1734580465972" duration="992000" />
+      <workItem from="1734588113238" duration="87000" />
+      <workItem from="1734641279162" duration="4288000" />
+      <workItem from="1734676016227" duration="4076000" />
+      <workItem from="1734765582665" duration="8030000" />
     </task>
     <servers />
   </component>

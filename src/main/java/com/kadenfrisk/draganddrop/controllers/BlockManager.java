@@ -14,6 +14,7 @@ import com.kadenfrisk.draganddrop.models.blocks.logic.WhileLoopBlock;
 import com.kadenfrisk.draganddrop.models.blocks.operation.MathBlock;
 import com.kadenfrisk.draganddrop.models.blocks.operation.VariableBlock;
 import com.kadenfrisk.draganddrop.models.blocks.sensors.SensorBlock;
+import com.kadenfrisk.draganddrop.util.DragOut;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -83,6 +84,14 @@ public class BlockManager {
             case "Variable Block" -> new VariableBlock();
             case "Sensor" -> new SensorBlock();
             case "Dialog Block" -> new DialogBlock();
+            case "Drag-out" -> {
+                Block block = DragOut.getInstance().getCurrentBlock();
+                if (block == null) throw new IllegalStateException(
+                    "No block to drag out"
+                );
+                block.setPrefHeight(Block.DEFAULT_HEIGHT);
+                yield block;
+            }
             default -> {
                 System.out.println(
                     "Unknown block type, defaulting to example block"
