@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 
 public class Draggable extends VBox {
 
-    private final Grid grid;
+    protected final Grid grid;
     private final ScrollPane scrollPane;
     private final Label titleText;
     private double x, y;
@@ -100,6 +100,8 @@ public class Draggable extends VBox {
 
         x = e.getSceneX();
         y = e.getSceneY();
+
+        e.consume();
     }
 
     public void relocate(Point2D point) {

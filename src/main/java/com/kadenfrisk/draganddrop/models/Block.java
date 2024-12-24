@@ -7,17 +7,23 @@ import com.kadenfrisk.draganddrop.custom.Draggable;
 import com.kadenfrisk.draganddrop.popups.WarningPopup;
 import com.kadenfrisk.draganddrop.util.DragOut;
 import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.robot.Robot;
 import org.slf4j.Logger;
 
 public class Block extends Draggable {
@@ -35,6 +41,7 @@ public class Block extends Draggable {
     protected ArrayList<Class> connectsTo = new ArrayList<>(); // Controls this blocks you can connect to this block
 
     protected String name;
+    private boolean preventCycle = false;
 
     public Block() {
         super(
@@ -105,7 +112,7 @@ public class Block extends Draggable {
     protected void handleMouseDragged(MouseEvent event) {
         super.handleMouseDragged(event);
         updateMouse();
-        checkAndDisconnect();
+        checkAndDisconnect(event);
     }
 
     private void updateMouse() {
@@ -116,6 +123,10 @@ public class Block extends Draggable {
     }
 
     private void handleMouseReleased(MouseEvent event) {
+
+        if (preventCycle)
+            return;
+
         this.setCursor(Cursor.DEFAULT);
         Mouse.getInstance().setDraggingBlock(false);
 
@@ -188,14 +199,63 @@ public class Block extends Draggable {
     @SuppressWarnings("unused")
     protected void onBlockReleased(MouseEvent event, Block nearestBlock) {}
 
-    private void checkAndDisconnect() {
+    private void checkAndDisconnect(MouseEvent event) {
         if (parents[0] != null) {
             double distance = calculateDistance(this, parents[0]);
 
             if (distance > DISCONNECT_THRESHOLD) {
+                Block oldParent = parents[0];
+                Point2D elLocationOnScreen = oldParent.localToScreen(this.getLayoutX(), this.getLayoutY());
+                Parent newParent = locateOverlappingContainerElement(elLocationOnScreen, oldParent);
+
                 disconnectFromParent();
+                System.out.println(event.getTarget());
+
+                //add element to a new parent
+                ((Pane) newParent).getChildren().add(this);
+
+                // move the element to the current drag location
+                Point2D locationInParent = newParent.screenToLocal(elLocationOnScreen);
+                this.relocate(locationInParent);
+                this.applyCss();
+                this.layout();
+
+                event.consume();
+
+                // re-initiate drag sequence programmatically
+                Platform.runLater(() -> {
+                    oldParent.preventCycle = true;
+                    Robot robot = new Robot();
+                    robot.mouseRelease(MouseButton.PRIMARY);
+                    robot.mousePress(MouseButton.PRIMARY);
+                    Platform.runLater(() -> {
+                        oldParent.preventCycle = false;
+                    });
+                });
             }
         }
+    }
+
+    private Parent locateOverlappingContainerElement(Point2D dragLocationOnScreen, Parent except) {
+        Parent r = grid;
+        boolean done = false;
+
+        while (!done) {
+            done = true;
+            for (int i = r.getChildrenUnmodifiable().size() - 1; i >= 0; i--) {
+                Node node = r.getChildrenUnmodifiable().get(i);
+                if (node.contains(node.screenToLocal(dragLocationOnScreen))) {
+                    if (node instanceof Parent nextP && node != except) {
+                        r = nextP;
+                        done = false;
+                        break;
+                    }
+//                    else //WOULD FIND NOT PARENT ELEMENTS
+//                        return r;
+                }
+            }
+        }
+        return r;
     }
 
     /**
@@ -215,6 +275,19 @@ public class Block extends Draggable {
             this.getName(),
             parentBlock.getName()
         );
+
+
+        parentBlock.getChildren().remove(this);
+
+        parentBlock.applyCss();
+        parentBlock.layout();
+
+        // Update heights dynamically up the chain
+//        updateParentHeights(this);//TODO: update heights now that disconnect has happened
+
+//        VBox.setMargin(this, new Insets(5, 0, 0, 0));
+
+        logger.info("{} disconnected from {}", parentBlock.getName(), this.getName());
     }
 
     private double calculateDistance(Block block1, Block block2) {
@@ -300,6 +373,9 @@ public class Block extends Draggable {
             disconnectFromParent();
         }
 
+        //seems to be grabbing the deepest descendant, not sure why that would be done
+        // doing it this way prevents the possibility of having multiple children in one parent
+        // and since parent is already controlled by drag targets it should be what the user intended
         Block lastChild = parent;
         while (lastChild.children[0] != null) {
             lastChild = lastChild.children[0];
